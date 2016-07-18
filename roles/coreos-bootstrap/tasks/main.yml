@@ -1,0 +1,15 @@
+---
+- name: Bootstrap | Check if bootstrap is needed
+  raw: stat /opt/bin/.bootstrapped
+  register: need_bootstrap
+  ignore_errors: True
+  tags:
+          - immutable_coreos
+
+- name: Bootstrap | Run bootstrap.sh
+  script: bootstrap.sh
+  when: need_bootstrap | failed
+  tags:
+          - immutable_coreos
+
+

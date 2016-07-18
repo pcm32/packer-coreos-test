@@ -1,0 +1,11 @@
+---
+- hosts: k8s-cluster
+  roles:
+          - { role: kubernetes/preinstall }
+          - { role: etcd }
+          - { role: docker }
+          - { role: kubernetes/node }
+
+- hosts: kube-master
+  roles: 
+          - { role: kubernetes/master }
